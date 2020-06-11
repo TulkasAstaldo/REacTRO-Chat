@@ -1,0 +1,68 @@
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { signIn, signInWithGoogle, signInWithGithub } from "../helpers/auth";
+
+export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      email: "",
+      password: "",
+    };
+  }
+
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    this.setState({ error: "" });
+    try {
+      await signIn(this.state.email, this.state.password);
+    } catch (error) {
+      this.setState({ error: error.message });
+    }
+  };
+
+  render() {
+    return (
+      <div>
+        <form autoComplete="off" onSubmit={this.handleSubmit}>
+          <h1>
+            Login to <Link to="/">Chat-App</Link>
+          </h1>
+          <p>Fill in the form below to login to your account.</p>
+          <label>
+            <input
+              type="email"
+              name="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+              placeholder="Email"
+            />
+          </label>
+          <label>
+            <input
+              type="password"
+              name="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+              placeholder="Password"
+            />
+          </label>
+          <div>
+            {this.state.error && <p>{this.state.error}</p>}
+            <button type="submit">Login</button>
+          </div>
+          <hr />
+          <p>
+            Don't have an acoount? <Link to="/signup">Sign up!</Link>
+          </p>
+        </form>
+      </div>
+    );
+  }
+}
