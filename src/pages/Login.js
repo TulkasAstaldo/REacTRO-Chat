@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { signIn, signInWithGoogle, signInWithGithub } from "../helpers/auth";
+import { signIn, signInWithGoogle, signInWithGitHub } from "../helpers/auth";
 
 export default class Login extends Component {
   constructor(props) {
@@ -22,6 +22,22 @@ export default class Login extends Component {
     this.setState({ error: "" });
     try {
       await signIn(this.state.email, this.state.password);
+    } catch (error) {
+      this.setState({ error: error.message });
+    }
+  };
+
+  googleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+    } catch (error) {
+      this.setState({ error: error.message });
+    }
+  };
+
+  gitHubSignIn = async () => {
+    try {
+      await signInWithGitHub();
     } catch (error) {
       this.setState({ error: error.message });
     }
@@ -53,9 +69,26 @@ export default class Login extends Component {
               placeholder="Password"
             />
           </label>
-          <div>
+          <div className="btn-group">
             {this.state.error && <p>{this.state.error}</p>}
-            <button type="submit">Login</button>
+            <button className="login-btn" type="submit">
+              Log In
+            </button>
+            <p>Or you can log in with: </p>
+            <button
+              className="btn-google"
+              type="submit"
+              onClick={this.googleSignIn}
+            >
+              Google
+            </button>
+            <button
+              className="btn-github"
+              type="submit"
+              onClick={this.gitHubSignIn}
+            >
+              GitHub
+            </button>
           </div>
           <hr />
           <p>

@@ -1,6 +1,8 @@
 import firebase from "firebase";
+import "firebase/auth";
+import "firebase/firestore";
 
-const config = {
+const firebaseConfig = {
   apiKey: "AIzaSyD6rS2yuKuj0Nx2a04WlPSvcOqjWBA6zOM",
   authDomain: "chat-app-32755.firebaseapp.com",
   databaseURL: "https://chat-app-32755.firebaseio.com",
@@ -9,7 +11,11 @@ const config = {
   messagingSenderId: "596480986887",
   appId: "1:596480986887:web:cf905846430279d476ffa2",
 };
-firebase.initializeApp(config);
+firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth;
 export const db = firebase.database();
+
+window.firebase = firebase;
+
+export default firebase;

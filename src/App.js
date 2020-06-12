@@ -9,7 +9,10 @@ import Home from "./pages/Home";
 import Chat from "./pages/Chat";
 import SignUp from "./pages/Signup";
 import Login from "./pages/Login";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { auth } from "./services/firebase";
+import "./App.css";
 
 const PrivateRoute = ({ component: Component, authenticated, ...rest }) => {
   return (
@@ -72,26 +75,30 @@ class App extends Component {
     return this.state.loading === true ? (
       <h2>Loading...</h2>
     ) : (
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Home}></Route>
-          <PrivateRoute
-            path="/chat"
-            authenticated={this.state.authenticated}
-            component={Chat}
-          ></PrivateRoute>
-          <PublicRoute
-            path="/signup"
-            authenticated={this.state.authenticated}
-            component={SignUp}
-          ></PublicRoute>
-          <PublicRoute
-            path="/login"
-            authenticated={this.state.authenticated}
-            component={Login}
-          ></PublicRoute>
-        </Switch>
-      </Router>
+      <div className="container">
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home}></Route>
+            <PrivateRoute
+              path="/chat"
+              authenticated={this.state.authenticated}
+              component={Chat}
+            ></PrivateRoute>
+            <PublicRoute
+              path="/signup"
+              authenticated={this.state.authenticated}
+              component={SignUp}
+            ></PublicRoute>
+            <PublicRoute
+              path="/login"
+              authenticated={this.state.authenticated}
+              component={Login}
+            ></PublicRoute>
+          </Switch>
+          <Footer />
+        </Router>
+      </div>
     );
   }
 }

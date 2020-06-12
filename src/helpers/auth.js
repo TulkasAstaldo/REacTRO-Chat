@@ -9,6 +9,11 @@ export const signIn = (email, password) => {
 };
 
 export const signInWithGoogle = () => {
+  const provider = new auth.GoogleAuthProvider();
+  return auth().signInWithPopup(provider);
+};
+
+export const signInWithGitHub = () => {
   const provider = new auth.GithubAuthProvider();
-  return auth.signInWithPopup(provider);
+  return auth().signInWithPopup(provider);
 };
