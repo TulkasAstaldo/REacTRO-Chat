@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signIn, signInWithGoogle, signInWithGitHub } from "../helpers/auth";
+import "./LoginSignup.css";
 
 const Login = (props) => {
   const [error, setError] = useState(null);
@@ -40,12 +41,12 @@ const Login = (props) => {
   };
 
   return (
-    <div>
+    <div className="form-container">
+      <h1>
+        Login to <Link to="/">Chat-App</Link>
+      </h1>
+      <p>Fill in the form below to login to your account.</p>
       <form autoComplete="off" onSubmit={handleSubmit}>
-        <h1>
-          Login to <Link to="/">Chat-App</Link>
-        </h1>
-        <p>Fill in the form below to login to your account.</p>
         <label>
           <input
             type="email"
@@ -64,24 +65,27 @@ const Login = (props) => {
             placeholder="Password"
           />
         </label>
-        <div className="btn-group">
-          {error && <p>{error}</p>}
-          <button className="login-btn" type="submit">
-            Log In
-          </button>
-          <p>Or you can log in with: </p>
-          <button className="btn-google" type="submit" onClick={googleSignIn}>
-            Google
-          </button>
-          <button className="btn-github" type="submit" onClick={gitHubSignIn}>
-            GitHub
-          </button>
-        </div>
-        <hr />
-        <p>
-          Don't have an acoount? <Link to="/signup">Sign up!</Link>
-        </p>
+
+        {error ? <p>{error.message}</p> : null}
+        <button className="btn login-btn" type="submit">
+          Log In
+        </button>
       </form>
+      <div className="btn-group">
+        <p>Or you can log in with: </p>
+        <button className="btn btn-google" type="submit" onClick={googleSignIn}>
+          Google
+        </button>
+        <button className="btn btn-github" type="submit" onClick={gitHubSignIn}>
+          GitHub
+        </button>
+        <p className="lower-p">
+          Don't have an account?{" "}
+          <Link className="link" to="/signup">
+            Sign up!
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

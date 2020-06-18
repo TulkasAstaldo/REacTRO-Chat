@@ -1,17 +1,20 @@
-import { db } from "../services/firebase";
+import { firestore } from "../services/firebase";
 
 export function readChats() {
   let abc = [];
-  db.ref("chats").on("value", (snapshot) => {
-    snapshot.forEach((snap) => {
-      abc.push(snap.val());
+  firestore
+    .collection("chats")
+    .get()
+    .on("value", (snapshot) => {
+      snapshot.forEach((snap) => {
+        abc.push(snap.val());
+      });
+      return abc;
     });
-    return abc;
-  });
 }
 
 export function writeChats(message) {
-  return db.ref("chats").push({
+  return firestore.collection("chats").doc().set({
     content: message.content,
     timestamp: message.timestamp,
     uid: message.uid,

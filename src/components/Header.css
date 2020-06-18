@@ -1,0 +1,53 @@
+header {
+  width: 100%;
+  height: 5%;
+}
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.dropdown-content {
+  display: none;
+  align-self: flex-end;
+  padding: 0;
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  cursor: pointer;
+}
+
+.nav-pic {
+  height: 100%;
+}
+
+.nav-pic > img {
+  height: 100%;
+}
+
+.dropdown-content-active {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  display: flex;
+  height: 10%;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  clear: both;
+  align-self: center;
+  margin-top: 50px;
+  list-style: none;
+}
+
+.sign-out:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}

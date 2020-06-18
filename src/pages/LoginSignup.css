@@ -1,0 +1,67 @@
+.form-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  height: 40%;
+  width: 60%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+label {
+  width: 100%;
+  height: 20%;
+}
+
+input {
+  font-family: inherit;
+  font-size: 15px;
+  height: 100%;
+  width: 100%;
+}
+
+form > button {
+  height: 20%;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  text-align: center;
+  align-items: center;
+}
+
+.btn-google {
+  background-image: url(https://cdn2.iconfinder.com/data/icons/social-icons-grey/512/google-512.png);
+  background-size: contain;
+  background-color: #ededed;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 50%;
+}
+
+.btn-github {
+  background-image: url(https://cdn2.iconfinder.com/data/icons/social-icons-grey/512/GITHUB-512.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: black;
+  color: white;
+  height: 100%;
+  width: 50%;
+}
+
+.btn-github:hover {
+  background-color: rgb(36, 36, 36);
+}
+
+.lower-p {
+  font-size: 10px;
+}

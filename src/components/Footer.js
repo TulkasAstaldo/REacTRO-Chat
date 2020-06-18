@@ -1,11 +1,10 @@
 import React from "react";
+import "./Footer.css";
 
 function Footer() {
   return (
     <footer className="pt-5">
-      <div className="container text-center">
-        <p>&copy; Chat-App 2020.</p>
-      </div>
+      <p>&copy; Chat-App 2020.</p>
     </footer>
   );
 }

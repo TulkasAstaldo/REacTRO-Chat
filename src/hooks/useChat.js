@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { auth, db } from "../services/firebase";
+import { auth, firestore } from "../services/firebase";
 
 const useChat = () => {
-  const [user, setUser] = useState(auth().currentUser);
+  const user = auth().currentUser;
   const [chats, setChats] = useState([]);
   const [content, setContent] = useState("");
   const [readError, setReadError] = useState(null);
@@ -21,22 +21,25 @@ const useChat = () => {
     setLoadingChats(true);
     const chatArea = myRef.current;
     try {
-      db.ref("chats").on("value", (snapshot) => {
-        let chats = [];
-        snapshot.forEach((snap) => {
-          chats.push(snap.val());
+      firestore
+        .collection("chats")
+        .get()
+        .then((snapshot) => {
+          let chats = [];
+          snapshot.docs.forEach((snap) => {
+            chats.push(snap.data());
+          });
+          chats.sort((a, b) => a.timestamp - b.timestamp);
+          setChats(chats);
+          console.log(chats);
+          chatArea.scrollBy(0, chatArea.scrollHeight);
+          setLoadingChats(false);
         });
-        chats.sort((a, b) => a.timestamp - b.timestamp);
-        setChats(chats);
-        console.log(chats);
-        chatArea.scrollBy(0, chatArea.scrollHeight);
-        setLoadingChats(false);
-      });
     } catch (error) {
       setReadError(error.message);
       setLoadingChats(false);
     }
-  }, []);
+  }, [chats]);
 
   const handleChange = (e) => {
     setContent(e.target.value);
@@ -47,13 +50,17 @@ const useChat = () => {
     setWriteError(null);
     const chatArea = myRef.current;
     try {
-      await db.ref("chats").push({
-        content: content,
-        timestamp: Date.now(),
-        uid: user.uid,
-      });
+      await firestore
+        .collection("chats")
+        .doc()
+        .set({
+          content: content,
+          timestamp: Date.now(),
+          uid: user.uid,
+          user: user.displayName || user.email,
+        });
 
-      setContent({ content: "" });
+      setContent("");
       chatArea.scrollBy(0, chatArea.scrollHeight);
     } catch (error) {
       setWriteError(error.message);

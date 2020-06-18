@@ -1,26 +1,21 @@
-html {
-  height: 100%;
-}
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+html,
 body {
-  background-image: url(https://www.pixelstalk.net/wp-content/uploads/2016/07/8-Bit-Backgrounds.jpg);
-  background-size: auto;
+  background-image: url(https://i.postimg.cc/4yD5bJVZ/8-Bit-Backgrounds.jpg);
+  background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 #root {
   height: 100%;
 }
-header {
-  width: 100%;
-}
-.navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
 
 .container {
-  width: 90%;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -29,27 +24,30 @@ header {
   align-items: center;
   margin: auto;
   color: white;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Press Start 2P", Helvetica, sans-serif;
+  text-align: center;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+a {
+  color: white;
+}
+
+a:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
 }
 
 button {
+  font-family: "Press Start 2P", Helvetica, sans-serif;
   box-shadow: inset 0px 1px 0px 0px #ffffff;
-  background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
-  background-color: #ededed;
+  /* background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%); */
   border-radius: 6px;
   border: 1px solid #dcdcdc;
   display: inline-block;
   cursor: pointer;
   color: #777777;
-  font-family: Arial;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
   padding: 6px 24px;
   text-decoration: none;
@@ -61,100 +59,4 @@ button {
 button:active {
   position: relative;
   top: 1px;
-}
-
-.btn-group {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  text-align: center;
-}
-
-.btn-google {
-  background-image: url(https://cdn2.iconfinder.com/data/icons/social-icons-grey/512/google-512.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.btn-github {
-  background-image: url(https://cdn2.iconfinder.com/data/icons/social-icons-grey/512/GITHUB-512.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: black;
-  color: white;
-}
-
-.btn-github::hover {
-  background-color: rgb(36, 36, 36);
-}
-
-a {
-  color: inherit;
-}
-
-a::hover {
-  color: white;
-  cursor: pointer;
-}
-
-footer {
-  align-self: baseline;
-}
-
-@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
-
-.chat-area {
-  margin-top: 60px;
-}
-
-.chat-area {
-  padding: 20px;
-  height: 400px;
-  overflow-y: scroll;
-}
-
-.chat-area .chat-bubble {
-  background-color: #bbdefb;
-  padding: 20px;
-  border-radius: 4px;
-  max-width: 300px;
-  word-wrap: break-word;
-}
-
-.chat-bubble .chat-time {
-  font-size: 12px;
-  color: #757575;
-  text-align: right;
-}
-
-.chat-area .chat-bubble.current-user {
-  margin-left: auto;
-  background-color: #a5d6a7;
-}
-
-.form-control {
-  width: 60%;
-}
-
-.form-control:focus {
-  box-shadow: none;
-}
-
-.btn {
-  margin-top: 10px;
-}
-
-.btn-submit {
-  background-color: #2e7d32;
-  color: white;
-}
-
-@media screen and (max-width: 767px) {
-  .form-control {
-    width: 100%;
-  }
-
-  .chat-area .chat-bubble {
-    max-width: 250px;
-  }
 }

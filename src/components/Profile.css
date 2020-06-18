@@ -1,0 +1,19 @@
+.CurrentUser {
+  height: 80%;
+  width: 50%;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.CurrentUser--profile {
+  height: 90%;
+  width: 80%;
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}

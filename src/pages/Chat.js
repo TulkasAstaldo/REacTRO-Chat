@@ -1,12 +1,12 @@
 import React from "react";
 import useChat from "../hooks/useChat";
+import "./Chat.css";
 
 const Chat = () => {
   const {
     user,
     chats,
     content,
-    readError,
     writeError,
     loadingChats,
     myRef,
@@ -16,41 +16,48 @@ const Chat = () => {
   } = useChat();
 
   return (
-    <div>
-      <div className="chat-area" ref={myRef}>
-        {loadingChats ? (
-          <div>
-            <span>Loading...</span>
-          </div>
-        ) : (
-          ""
-        )}
-        {chats.map((chat) => (
-          <p
-            key={chat.timestamp}
-            className={`chat bubble ${
-              user.uid === chat.uid ? "current-user" : ""
-            }`}
-          >
-            {chat.content}
-            <br />
-            <span className="chat-time">{formatTime(chat.timestamp)}</span>
-          </p>
-        ))}
-      </div>
-      <form onSubmit={handleSubmit} className="chat-form">
-        <textarea
-          className="chat-text"
-          value={content}
-          onChange={handleChange}
-        />
-        {writeError && <p className="error-txt">{writeError}</p>}
-        <button type="submit">Send</button>
-      </form>
-      <div>
-        Logged In as : <strong>{user.email}</strong>
-      </div>
-    </div>
+    <>
+      <main className="chat-container">
+        <aside className="chat-users">active users: {} </aside>
+        <div className="chat-area" ref={myRef}>
+          {loadingChats ? (
+            <div>
+              <span>Loading...</span>
+            </div>
+          ) : (
+            ""
+          )}
+          {chats.map((chat) => (
+            <p
+              key={chat.timestamp}
+              className={`chat-bubble ${
+                user.uid === chat.uid ? "current-user" : ""
+              }`}
+            >
+              <span className="username">{chat.user}:</span>
+              <br />
+              {chat.content}
+              <br />
+              <span className="chat-time">{formatTime(chat.timestamp)}</span>
+            </p>
+          ))}
+        </div>
+        <form onSubmit={handleSubmit} className="chat-form">
+          <textarea
+            className="chat-text"
+            value={content}
+            onChange={handleChange}
+          />
+          {writeError && <p className="error-txt">{writeError}</p>}
+          <button className="btn" id="btn-submit" type="submit">
+            Send
+          </button>
+        </form>
+        <div className="loggedin">
+          Logged In as : <strong>{user.email}</strong>
+        </div>
+      </main>
+    </>
   );
 };
 
