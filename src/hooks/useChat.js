@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { auth, firestore } from "../services/firebase";
+import { UserContext } from "../Context";
 
 const useChat = () => {
-  const user = auth().currentUser;
+  const { user } = useContext(UserContext);
   const [chats, setChats] = useState([]);
   const [content, setContent] = useState("");
   const [readError, setReadError] = useState(null);
@@ -20,26 +21,27 @@ const useChat = () => {
     setReadError(null);
     setLoadingChats(true);
     const chatArea = myRef.current;
-    try {
-      firestore
-        .collection("chats")
-        .get()
-        .then((snapshot) => {
+    const updateChats = firestore
+      .collection("chats")
+      // .get()
+      .onSnapshot(
+        (snapshot) => {
+          setLoadingChats(false);
           let chats = [];
           snapshot.docs.forEach((snap) => {
             chats.push(snap.data());
           });
           chats.sort((a, b) => a.timestamp - b.timestamp);
           setChats(chats);
-          console.log(chats);
           chatArea.scrollBy(0, chatArea.scrollHeight);
+        },
+        (error) => {
+          setReadError(error.message);
           setLoadingChats(false);
-        });
-    } catch (error) {
-      setReadError(error.message);
-      setLoadingChats(false);
-    }
-  }, [chats]);
+        }
+      );
+    return () => updateChats();
+  }, []);
 
   const handleChange = (e) => {
     setContent(e.target.value);
@@ -50,15 +52,12 @@ const useChat = () => {
     setWriteError(null);
     const chatArea = myRef.current;
     try {
-      await firestore
-        .collection("chats")
-        .doc()
-        .set({
-          content: content,
-          timestamp: Date.now(),
-          uid: user.uid,
-          user: user.displayName || user.email,
-        });
+      await firestore.collection("chats").doc().set({
+        content: content,
+        timestamp: Date.now(),
+        uid: user.uid,
+        user: auth().currentUser.displayName,
+      });
 
       setContent("");
       chatArea.scrollBy(0, chatArea.scrollHeight);

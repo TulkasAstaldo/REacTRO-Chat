@@ -1,13 +1,50 @@
 header {
   width: 100%;
   height: 5%;
+  display: flex;
+  align-items: center;
 }
 .navbar {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+}
+
+.nav-ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.nav-li {
+  text-align: center;
+  height: 100%;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.nav-item.nav-link,
+.navbar-brand {
+  width: 70%;
+}
+
+.profile {
+  height: 100%;
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .dropdown-content {
@@ -15,7 +52,7 @@ header {
   align-self: flex-end;
   padding: 0;
 }
-.profile {
+.pic-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import { auth } from "../services/firebase";
+import { UserContext } from "../Context";
 
-const HomePage = (props) => {
-  const user = auth().currentUser;
+const HomePage = () => {
+  const { user } = useContext(UserContext);
   return (
     <>
       <div className="home-container">
-        <h1 className="home-title">Welcome to Chat-App</h1>
+        <h1 className="home-title">
+          Welcome to Re<span style={{ fontSize: "50%" }}>ac</span>tro Chat
+        </h1>
         <p className="lead">
           A great place to share your thoughts with friends
         </p>
         <div className="home-btns">
           {user ? (
             <>
-              Welcome {user.displayName} Join the <Link to="/chat">Chat</Link>
+              <p className="user-welcome">
+                Welcome <br /> {user.displayName}{" "}
+              </p>
+              Join the <Link to="/chat">Chat</Link>
             </>
           ) : (
             <>

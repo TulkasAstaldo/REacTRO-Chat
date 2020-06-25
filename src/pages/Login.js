@@ -2,25 +2,19 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signIn, signInWithGoogle, signInWithGitHub } from "../helpers/auth";
 import "./LoginSignup.css";
+import { useInput } from "../hooks/useInput";
 
 const Login = (props) => {
   const [error, setError] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    name === "email" && setEmail(value);
-    name === "password" && setPassword(value);
-  };
+  const { value: email, bind: bindEmail } = useInput("");
+  const { value: password, bind: bindPassword } = useInput("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError({ error: "" });
     try {
       await signIn(email, password);
     } catch (error) {
-      setError({ error: error.message });
+      setError(error.message);
     }
   };
 
@@ -28,7 +22,7 @@ const Login = (props) => {
     try {
       await signInWithGoogle();
     } catch (error) {
-      setError({ error: error.message });
+      setError(error.message);
     }
   };
 
@@ -36,37 +30,30 @@ const Login = (props) => {
     try {
       await signInWithGitHub();
     } catch (error) {
-      setError({ error: error.message });
+      setError(error.message);
     }
   };
+
+  console.log(error);
 
   return (
     <div className="form-container">
       <h1>
-        Login to <Link to="/">Chat-App</Link>
+        Log In to <br />{" "}
+        <Link to="/">
+          Re<span style={{ fontSize: "50%" }}>ac</span>tro Chat
+        </Link>
       </h1>
       <p>Fill in the form below to login to your account.</p>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            placeholder="Email"
-          />
+          <input type="email" {...bindEmail} placeholder="Email" />
         </label>
         <label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-            placeholder="Password"
-          />
+          <input type="password" {...bindPassword} placeholder="Password" />
         </label>
 
-        {error ? <p>{error.message}</p> : null}
+        {error ? <p>{error}</p> : null}
         <button className="btn login-btn" type="submit">
           Log In
         </button>
@@ -80,7 +67,8 @@ const Login = (props) => {
           GitHub
         </button>
         <p className="lower-p">
-          Don't have an account?{" "}
+          Don't have an account?
+          <br />
           <Link className="link" to="/signup">
             Sign up!
           </Link>

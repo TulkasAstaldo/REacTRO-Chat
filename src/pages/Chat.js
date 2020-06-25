@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import useChat from "../hooks/useChat";
 import "./Chat.css";
+import { UserContext } from "../Context";
 
 const Chat = () => {
+  const { user } = useContext(UserContext);
   const {
-    user,
     chats,
     content,
     writeError,
@@ -18,7 +19,7 @@ const Chat = () => {
   return (
     <>
       <main className="chat-container">
-        <aside className="chat-users">active users: {} </aside>
+        <aside className="chat-users">active users: {}</aside>
         <div className="chat-area" ref={myRef}>
           {loadingChats ? (
             <div>
@@ -37,6 +38,7 @@ const Chat = () => {
               <span className="username">{chat.user}:</span>
               <br />
               {chat.content}
+              {chat.key}
               <br />
               <span className="chat-time">{formatTime(chat.timestamp)}</span>
             </p>

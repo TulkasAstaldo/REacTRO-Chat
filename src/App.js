@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import Chat from "./pages/Chat";
@@ -8,29 +8,39 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PrivateRoute from "./HOCs/PrivateRoute";
 import PublicRoute from "./HOCs/PublicRoute";
-import { auth } from "./services/firebase";
 import "./App.css";
 import Profile from "./components/Profile";
+import { UserContext } from "./Context";
+import { ThemeContext } from "./ThemeContext";
 
 const App = () => {
-  const [authenticated, setAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    auth().onAuthStateChanged((user) => {
-      if (user) {
-        setAuthenticated(true);
-        setLoading(false);
-      } else {
-        setAuthenticated(false);
-        setLoading(false);
-      }
-    });
-  }, []);
+  const { user, loading, authenticated } = useContext(UserContext);
+  const { theme } = useContext(ThemeContext);
+
+  const style = {
+    backgroundImage: `url(${theme})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    height: "100%",
+    margin: 0,
+    padding: 0,
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignContent: "center",
+    alignItems: "center",
+    color: "white",
+    textAlign: "center",
+  };
 
   return loading === true ? (
-    <h2>Loading...</h2>
+    <div className="loading">
+      <h2>Loading...</h2>
+    </div>
   ) : (
-    <div className="container">
+    <div style={style}>
       <Header />
       <Switch>
         <Route exact path="/" component={Home}></Route>

@@ -1,31 +1,74 @@
-import React from "react";
-import { auth, db } from "../services/firebase";
+import React, { useContext, useState } from "react";
+import { auth, firestore, storage } from "../services/firebase";
 import "./Profile.css";
+import { UserContext } from "../Context";
+import { useInput } from "../hooks/useInput";
 
-const Profile = (props) => {
-  const user = auth().currentUser;
+const Profile = () => {
+  const { value: displayName, bind: bindDisplayName } = useInput("");
+  let imageInput = null;
+  const { user } = useContext(UserContext);
+  let file;
+  const uid = auth().currentUser.uid;
+
+  const userRef = firestore.doc(`/users/${uid}`);
+
+  const fileChange = () => (file = imageInput ? imageInput.files[0] : "");
+
+  console.log(uid);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(file);
+    if (displayName) {
+      userRef.update({ displayName });
+    }
+    if (file) {
+      console.log("works");
+      storage
+        .ref()
+        .child("user-profiles")
+        .child(uid)
+        .child(file.name)
+        .put(file)
+        .then((response) => response.ref.getDownloadURL())
+        .then((photoUrl) => userRef.update({ photoUrl }));
+    }
+  };
 
   return (
     <section className="CurrentUser">
-      <div className="CurrentUser--profile">
-        {user.photoURL ? (
-          <img src={user.photoURL} alt={user.displayName} />
-        ) : (
-          <img
-            src="https://img.icons8.com/officel/80/000000/no-image.png"
-            alt="None"
-          />
-        )}
-        <div className="CurrentUser--information">
-          <h2>{user.displayName}</h2>
-          <p className="email">{user.email}</p>
-          <p className="created-at">{""}</p>
-        </div>
+      <div className="user-details">
+        <img
+          className="user-img"
+          src={`${user.photoUrl}`}
+          referrerPolicy="no-referrer"
+          alt={user.displayName}
+        />
+        <h4>{user.displayName}</h4>
+        <p className="email">{user.email}</p>
       </div>
-      <div>
-        <button className="btn" onClick={auth().signOut}>
-          Sign Out
-        </button>
+      <div className="CurrentUser--information">
+        <form onSubmit={handleSubmit}>
+          <label className="profile-lbl">
+            <input
+              type="text"
+              {...bindDisplayName}
+              placeholder="Display Name"
+            />
+          </label>
+
+          <label className="profile-lbl">
+            <input
+              type="file"
+              accept="image/gif, image/jpeg, image/png"
+              ref={(ref) => (imageInput = ref)}
+              onChange={fileChange}
+            />
+          </label>
+          <label className="profile-lbl">
+            <input className="update" type="submit" />
+          </label>
+        </form>
       </div>
     </section>
   );

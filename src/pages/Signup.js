@@ -2,27 +2,22 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signUp, signInWithGoogle, signInWithGitHub } from "../helpers/auth";
 import "./LoginSignup.css";
+import { createUserProfileDocument } from "../services/firebase";
+import { useInput } from "../hooks/useInput";
 
 const SignUp = (props) => {
   const [error, setError] = useState(null);
-  const [displayName, setDisplayName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    name === "email" && setEmail(value);
-    name === "password" && setPassword(value);
-    name === "display-name" && setDisplayName(value);
-  };
+  const { value: email, bind: bindEmail } = useInput();
+  const { value: password, bind: bindPassword } = useInput();
+  const { value: displayName, bind: bindDisplayName } = useInput();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError({ error: "" });
     try {
-      await signUp(displayName, email, password);
-    } catch (error) {
-      setError({ error: error.message });
+      const { user } = await signUp(email, password);
+      createUserProfileDocument(user, { displayName });
+    } catch (err) {
+      setError(err.message);
     }
   };
 
@@ -30,7 +25,7 @@ const SignUp = (props) => {
     try {
       await signInWithGoogle();
     } catch (error) {
-      setError({ error: error.message });
+      setError(error.message);
     }
   };
 
@@ -38,45 +33,30 @@ const SignUp = (props) => {
     try {
       await signInWithGitHub();
     } catch (error) {
-      setError({ error: error.message });
+      setError(error.message);
     }
   };
 
   return (
     <div className="form-container">
       <h1>
-        Sign Up to <Link to="/">Chat App</Link>
+        Sign Up to <br />
+        <Link to="/">
+          Re<span style={{ fontSize: "50%" }}>ac</span>tro Chat
+        </Link>
       </h1>
       <p>Fill in the form below to create an account</p>
       <form onSubmit={handleSubmit}>
         <label>
-          <input
-            type="textl"
-            name="display-name"
-            value={displayName}
-            placeholder="Display Name"
-            onChange={handleChange}
-          />
+          <input type="text" {...bindDisplayName} placeholder="Display Name" />
         </label>
         <label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Email"
-            onChange={handleChange}
-          />
+          <input type="email" {...bindEmail} placeholder="Email" />
         </label>
         <label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            placeholder="Password"
-            onChange={handleChange}
-          />
+          <input type="password" {...bindPassword} placeholder="Password" />
         </label>
-        {error ? <p>{error.message}</p> : null}
+        {error ? <p>{error}</p> : null}
         <button className="btn" type="submit">
           Sign Up
         </button>
@@ -90,7 +70,9 @@ const SignUp = (props) => {
           GitHub
         </button>
         <p className="lower-p">
-          Already have an account? <Link to="/login">Login</Link>
+          Already have an account?
+          <br />
+          <Link to="/login">Login</Link>
         </p>
       </div>
     </div>
