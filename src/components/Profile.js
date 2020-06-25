@@ -15,15 +15,12 @@ const Profile = () => {
 
   const fileChange = () => (file = imageInput ? imageInput.files[0] : "");
 
-  console.log(uid);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(file);
     if (displayName) {
       userRef.update({ displayName });
     }
     if (file) {
-      console.log("works");
       storage
         .ref()
         .child("user-profiles")
