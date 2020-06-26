@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { auth, firestore, storage } from "../services/firebase";
 import "./Profile.css";
 import { UserContext } from "../Context";
@@ -9,7 +9,7 @@ const Profile = () => {
   let imageInput = null;
   const { user } = useContext(UserContext);
   let file;
-  const uid = auth().currentUser.uid;
+  const uid = user.uid;
 
   const userRef = firestore.doc(`/users/${uid}`);
 

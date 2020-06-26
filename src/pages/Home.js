@@ -9,9 +9,14 @@ const HomePage = () => {
   return (
     <>
       <div className="home-container">
-        <h1 className="home-title">
-          Welcome to Re<span style={{ fontSize: "50%" }}>ac</span>tro Chat
-        </h1>
+        <div className="home-title">
+          <p>Welcome to</p>
+          <h1>
+            Re<span style={{ fontSize: "50%" }}>ac</span>tro
+            <br />
+            Chat!
+          </h1>
+        </div>
         <p className="lead">
           A great place to share your thoughts with friends
         </p>
@@ -26,7 +31,7 @@ const HomePage = () => {
           ) : (
             <>
               <Link className="btn btn-signup" to="/signup">
-                Create New Account
+                New Account
               </Link>
               <span>Or</span>
               <Link className="btn btn-signin" to="/login">

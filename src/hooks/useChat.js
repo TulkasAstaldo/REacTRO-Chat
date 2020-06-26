@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import { auth, firestore } from "../services/firebase";
+import { firestore } from "../services/firebase";
 import { UserContext } from "../Context";
 
 const useChat = () => {
@@ -13,7 +13,16 @@ const useChat = () => {
 
   const formatTime = (timestamp) => {
     const d = new Date(timestamp);
-    const time = `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
+    const time =
+      ("0" + d.getDate()).slice(-2) +
+      "/" +
+      ("0" + (d.getMonth() + 1)).slice(-2) +
+      "/" +
+      d.getFullYear() +
+      " " +
+      ("0" + d.getHours()).slice(-2) +
+      ":" +
+      ("0" + d.getMinutes()).slice(-2);
     return time;
   };
 
@@ -21,25 +30,22 @@ const useChat = () => {
     setReadError(null);
     setLoadingChats(true);
     const chatArea = myRef.current;
-    const updateChats = firestore
-      .collection("chats")
-      // .get()
-      .onSnapshot(
-        (snapshot) => {
-          setLoadingChats(false);
-          let chats = [];
-          snapshot.docs.forEach((snap) => {
-            chats.push(snap.data());
-          });
-          chats.sort((a, b) => a.timestamp - b.timestamp);
-          setChats(chats);
-          chatArea.scrollBy(0, chatArea.scrollHeight);
-        },
-        (error) => {
-          setReadError(error.message);
-          setLoadingChats(false);
-        }
-      );
+    const updateChats = firestore.collection("chats").onSnapshot(
+      (snapshot) => {
+        setLoadingChats(false);
+        let chats = [];
+        snapshot.docs.forEach((snap) => {
+          chats.push(snap.data());
+        });
+        chats.sort((a, b) => a.timestamp - b.timestamp);
+        setChats(chats);
+        chatArea.scrollBy(0, chatArea.scrollHeight);
+      },
+      (error) => {
+        setReadError(error.message);
+        setLoadingChats(false);
+      }
+    );
     return () => updateChats();
   }, []);
 
@@ -56,7 +62,7 @@ const useChat = () => {
         content: content,
         timestamp: Date.now(),
         uid: user.uid,
-        user: auth().currentUser.displayName,
+        user: user.displayName,
       });
 
       setContent("");
@@ -64,6 +70,7 @@ const useChat = () => {
     } catch (error) {
       setWriteError(error.message);
     }
+    console.log(user.displayName);
   };
 
   return {

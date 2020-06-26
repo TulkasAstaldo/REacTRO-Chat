@@ -45,18 +45,18 @@ const Chat = () => {
           ))}
         </div>
         <form onSubmit={handleSubmit} className="chat-form">
-          <textarea
+          <input
             className="chat-text"
             value={content}
             onChange={handleChange}
           />
           {writeError && <p className="error-txt">{writeError}</p>}
-          <button className="btn" id="btn-submit" type="submit">
+          <button type="submit" className="btn" id="btn-submit">
             Send
           </button>
         </form>
         <div className="loggedin">
-          Logged In as : <strong>{user.email}</strong>
+          Logged In as : <strong>{user.displayName}</strong>
         </div>
       </main>
     </>

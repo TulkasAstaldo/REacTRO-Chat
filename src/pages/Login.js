@@ -34,8 +34,6 @@ const Login = (props) => {
     }
   };
 
-  console.log(error);
-
   return (
     <div className="form-container">
       <h1>
