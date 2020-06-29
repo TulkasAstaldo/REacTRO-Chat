@@ -39,36 +39,63 @@ const SignUp = (props) => {
 
   return (
     <div className="form-container">
-      <h1>
-        Sign Up to <br />
-        <Link to="/">
-          Re<span style={{ fontSize: "50%" }}>ac</span>tro Chat
-        </Link>
-      </h1>
-      <p>Fill in the form below to create an account</p>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <input type="text" {...bindDisplayName} placeholder="Display Name" />
+      <div className="login-signup-title">
+        <p>Sign up to</p>
+        <h1>
+          Re<span style={{ fontSize: "50%" }}>ac</span>tro
+          <br />
+          Chat
+        </h1>
+      </div>
+
+      <form className="login-signup-form" onSubmit={handleSubmit}>
+        <label className="login-signup-label">
+          <input
+            className="form-input"
+            type="text"
+            {...bindDisplayName}
+            placeholder="Display Name"
+          />
         </label>
-        <label>
-          <input type="email" {...bindEmail} placeholder="Email" />
+        <label className="login-signup-label">
+          <input
+            className="form-input"
+            type="email"
+            {...bindEmail}
+            placeholder="Email"
+          />
         </label>
-        <label>
-          <input type="password" {...bindPassword} placeholder="Password" />
+        <label className="login-signup-label">
+          <input
+            className="form-input"
+            type="password"
+            {...bindPassword}
+            placeholder="Password"
+          />
         </label>
         {error ? <p>{error}</p> : null}
-        <button className="btn" type="submit">
+        <button className="btn btn-submit" type="submit">
           Sign Up
         </button>
       </form>
       <div className="btn btn-group">
-        <p>Or Sign Up with:</p>
-        <button className="btn btn-google" type="button" onClick={googleSignIn}>
-          Google
-        </button>
-        <button className="btn btn-github" type="button" onClick={gitHubSignIn}>
-          GitHub
-        </button>
+        <p className="upper-p">Or Sign Up with:</p>
+        <div className="btn-sub">
+          <button
+            className="btn btn-google"
+            type="submit"
+            onClick={googleSignIn}
+          >
+            Google
+          </button>
+          <button
+            className="btn btn-github"
+            type="submit"
+            onClick={gitHubSignIn}
+          >
+            GitHub
+          </button>
+        </div>
         <p className="lower-p">
           Already have an account?
           <br />

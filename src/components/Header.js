@@ -25,14 +25,18 @@ const Header = () => {
           <ul className="nav-ul">
             <li className="nav-li">
               <Link className="navbar-brand" to={"/"}>
-                Re<span style={{ fontSize: "50%" }}>ac</span>tro Chat
+                Re<span style={{ fontSize: "50%" }}>ac</span>tro
+                <br />
+                Chat
               </Link>
             </li>
 
             {user ? (
               <>
                 <li className="nav-li">
-                  <button onClick={handleClick}>Change Theme</button>
+                  <button className="btn-theme" onClick={handleClick}>
+                    Change Theme
+                  </button>
                 </li>
                 <li className="profile">
                   <div className="pic-container" ref={ref} onClick={toggleMenu}>
@@ -67,7 +71,7 @@ const Header = () => {
               <>
                 <li className="nav-li">
                   <Link className="nav-item nav-link" to="/login">
-                    Sign In
+                    Log In
                   </Link>
                 </li>
                 <li className="nav-li">

@@ -36,34 +36,60 @@ const Login = (props) => {
 
   return (
     <div className="form-container">
-      <h1>
-        Log In to <br />{" "}
-        <Link to="/">
-          Re<span style={{ fontSize: "50%" }}>ac</span>tro Chat
-        </Link>
-      </h1>
-      <p>Fill in the form below to login to your account.</p>
-      <form autoComplete="off" onSubmit={handleSubmit}>
-        <label>
-          <input type="email" {...bindEmail} placeholder="Email" />
+      <div className="login-signup-title">
+        <p>Log in to</p>
+        <h1>
+          Re<span style={{ fontSize: "50%" }}>ac</span>tro
+          <br />
+          Chat
+        </h1>
+      </div>
+
+      <form
+        className="login-signup-form"
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
+        <label className="login-signup-label" for="email">
+          <input
+            type="email"
+            className="form-input"
+            {...bindEmail}
+            placeholder="Email"
+          />
         </label>
-        <label>
-          <input type="password" {...bindPassword} placeholder="Password" />
+        <label className="login-signup-label">
+          <input
+            type="password"
+            className="form-input"
+            {...bindPassword}
+            placeholder="Password"
+          />
         </label>
 
         {error ? <p>{error}</p> : null}
-        <button className="btn login-btn" type="submit">
+        <button className="btn btn-submit" type="submit">
           Log In
         </button>
       </form>
       <div className="btn-group">
-        <p>Or you can log in with: </p>
-        <button className="btn btn-google" type="submit" onClick={googleSignIn}>
-          Google
-        </button>
-        <button className="btn btn-github" type="submit" onClick={gitHubSignIn}>
-          GitHub
-        </button>
+        <p className="upper-p">Or Log in with:</p>
+        <div className="btn-sub">
+          <button
+            className="btn btn-google"
+            type="submit"
+            onClick={googleSignIn}
+          >
+            Google
+          </button>
+          <button
+            className="btn btn-github"
+            type="submit"
+            onClick={gitHubSignIn}
+          >
+            GitHub
+          </button>
+        </div>
         <p className="lower-p">
           Don't have an account?
           <br />

@@ -21,12 +21,10 @@ const Chat = () => {
       <main className="chat-container">
         <aside className="chat-users">active users: {}</aside>
         <div className="chat-area" ref={myRef}>
-          {loadingChats ? (
+          {loadingChats && (
             <div>
               <span>Loading...</span>
             </div>
-          ) : (
-            ""
           )}
           {chats.map((chat) => (
             <p
@@ -56,7 +54,7 @@ const Chat = () => {
           </button>
         </form>
         <div className="loggedin">
-          Logged In as : <strong>{user.displayName}</strong>
+          Logged In as : <br /> <strong>{user.displayName}</strong>
         </div>
       </main>
     </>

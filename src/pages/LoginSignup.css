@@ -1,57 +1,58 @@
 .form-container {
-  height: 100%;
+  height: 80%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.login-signup-form {
+  display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
-  width: 50%;
-  margin-top: 2%;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  height: 40%;
-  width: 60%;
-  justify-content: space-around;
   align-items: center;
 }
 
-h1 {
-  line-height: 150%;
-  width: 100%;
+.login-signup-title {
+  background-color: rgba(0, 0, 0, 0.4);
+  line-height: 170%;
+  padding-left: 1%;
+  padding-right: 1%;
 }
 
-label {
-  width: 100%;
-  height: 20%;
+.login-signup-label {
+  height: 15%;
+  display: flex;
 }
 
-input {
+.form-input {
   font-family: inherit;
-  font-size: 15px;
+  font-size: 0.9em;
   height: 100%;
   width: 100%;
-}
-
-form > button {
-  height: 20%;
 }
 
 .btn-group {
   display: flex;
   flex-direction: column;
-  width: 50%;
+
   text-align: center;
   align-items: center;
+  justify-content: space-between;
 }
 
 .btn-group > p {
   background-color: rgba(0, 0, 0, 0.4);
+  margin: 0;
 }
 
-.btn.btn-submit {
-  width: 60%;
+.btn-sub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-google {
@@ -59,8 +60,6 @@ form > button {
   background-size: contain;
   background-color: #ededed;
   background-repeat: no-repeat;
-  height: 100%;
-  width: 50%;
 }
 
 .btn-github {
@@ -69,8 +68,6 @@ form > button {
   background-repeat: no-repeat;
   background-color: black;
   color: white;
-  height: 100%;
-  width: 50%;
 }
 
 .btn-github:hover {
@@ -80,4 +77,68 @@ form > button {
 .lower-p {
   font-size: 10px;
   line-height: 200%;
+}
+
+@media (max-width: 849px) {
+  .login-signup-form {
+    height: 50%;
+    width: 60%;
+  }
+  label {
+    width: 250px;
+  }
+
+  .btn.btn-submit {
+    width: 200px;
+    height: 15%;
+    font-size: 1.1em;
+  }
+  .btn-group {
+    height: 30%;
+    width: 200px;
+  }
+
+  .upper-p {
+    font-size: 0.9em;
+  }
+  .btn-sub {
+    height: 40%;
+    width: 100%;
+  }
+  .btn-google,
+  .btn-github {
+    width: 100%;
+    font-size: 0.8em;
+    height: 100%;
+  }
+}
+
+@media (min-width: 850px) {
+  .login-signup-form {
+    height: 50%;
+    width: 60%;
+  }
+  label {
+    width: 350px;
+  }
+  .btn.btn-submit {
+    width: 220px;
+    height: 19%;
+    font-size: 1.2em;
+  }
+  .btn-group {
+    height: 30%;
+    width: 200px;
+  }
+
+  .btn-sub {
+    height: 40%;
+    width: 100%;
+  }
+  .btn-google,
+  .btn-github {
+    width: 100%;
+    font-size: 0.8em;
+    height: 100%;
+  }
 }

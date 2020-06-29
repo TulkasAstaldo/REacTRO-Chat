@@ -20,6 +20,7 @@ a {
   color: white;
   text-decoration: none;
   padding: 3%;
+  text-align: center;
 }
 
 a:hover {
@@ -37,7 +38,7 @@ button {
   display: inline-block;
   cursor: pointer;
   color: rgb(53, 53, 53);
-  font-size: 13px;
+  /* font-size: 13px; */
   font-weight: bold;
   padding: 6px 24px;
   text-decoration: none;

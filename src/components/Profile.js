@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { auth, firestore, storage } from "../services/firebase";
+import { firestore, storage } from "../services/firebase";
 import "./Profile.css";
 import { UserContext } from "../Context";
 import { useInput } from "../hooks/useInput";
@@ -41,30 +41,34 @@ const Profile = () => {
           referrerPolicy="no-referrer"
           alt={user.displayName}
         />
-        <h4>{user.displayName}</h4>
+        <p className="userName">{user.displayName}</p>
         <p className="email">{user.email}</p>
       </div>
       <div className="CurrentUser--information">
-        <form onSubmit={handleSubmit}>
+        <form className="profile-form" onSubmit={handleSubmit}>
+          <p className="edit-profile">Edit your profile:</p>
           <label className="profile-lbl">
             <input
+              className="profile-input"
               type="text"
               {...bindDisplayName}
-              placeholder="Display Name"
+              placeholder="New Username"
             />
           </label>
-
-          <label className="profile-lbl">
+          <label className="profile-pic-lbl">
+            Change profile picture
             <input
+              style={{ display: "none" }}
               type="file"
               accept="image/gif, image/jpeg, image/png"
               ref={(ref) => (imageInput = ref)}
               onChange={fileChange}
             />
           </label>
-          <label className="profile-lbl">
-            <input className="update" type="submit" />
-          </label>
+
+          <button className="update" type="submit">
+            Submit
+          </button>
         </form>
       </div>
     </section>

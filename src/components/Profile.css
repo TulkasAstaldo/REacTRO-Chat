@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  width: 50%;
+
   background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -16,18 +16,103 @@
   height: 80%;
 }
 
+.profile-input {
+  font-family: inherit;
+  overflow: hidden;
+}
+
+.profile-lbl,
+.profile-pic-lbl {
+  display: flex;
+  flex-direction: column;
+}
+.profile-pic-lbl {
+  display: flex;
+  flex-direction: column;
+  color: rgb(53, 53, 53);
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  /* box-shadow: 5px 10px rgb(68, 68, 68); */
+}
+
+.profile-pic-lbl:active {
+  background-color: rgb(233, 233, 233);
+  /* margin-top: 5px;
+  box-shadow: 5px 5px; */
+}
+
 .CurrentUser--information {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 40%;
+  height: 45%;
+  font-family: inherit;
 }
 
-form {
+.profile-form {
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 60%;
+  width: 100%;
   justify-content: space-around;
   align-items: center;
+}
+
+@media (max-width: 849px) {
+  .CurrentUser {
+    width: 350px;
+  }
+
+  .profile-lbl {
+    height: 15%;
+  }
+  .profile-input {
+    height: 100%;
+  }
+  .profile-pic-lbl {
+    height: 15%;
+    width: 200px;
+    font-size: 0.8em;
+  }
+
+  .update {
+    width: 150px;
+    height: 20%;
+    font-size: 1em;
+  }
+}
+
+@media (min-width: 850px) {
+  .CurrentUser {
+    width: 450px;
+  }
+
+  .user-details {
+    font-size: 1.1em;
+  }
+  .edit-profile {
+    font-size: 1.2em;
+    margin-bottom: 0;
+  }
+  .profile-lbl {
+    height: 15%;
+    font-size: 1.1em;
+  }
+  .profile-input {
+    height: 100%;
+  }
+  .profile-pic-lbl {
+    width: 220px;
+    height: 19%;
+    font-size: 1em;
+  }
+  .update {
+    width: 190px;
+    height: 19%;
+    font-size: 1.2em;
+  }
 }

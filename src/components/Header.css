@@ -26,21 +26,24 @@ header {
 .nav-li {
   text-align: center;
   height: 100%;
-  width: 15%;
+  width: 30%;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: center;
 }
 
-.nav-item.nav-link,
 .navbar-brand {
-  width: 70%;
+  width: 30%;
+}
+
+.nav-item.nav-link {
+  width: 30%;
 }
 
 .profile {
   height: 100%;
-  width: 15%;
+  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,4 +90,36 @@ header {
   background-color: white;
   color: black;
   cursor: pointer;
+}
+
+@media (max-width: 849px) {
+  .navbar {
+    font-size: 0.8em;
+  }
+  .nav-item.nav-link {
+    width: 100px;
+  }
+  .navbar-brand {
+    width: 100px;
+  }
+  .btn-theme {
+    width: 10em;
+    font-size: 0.9em;
+  }
+}
+
+@media (min-width: 850px) {
+  .navbar {
+    font-size: 1.1em;
+  }
+  .nav-item.nav-link {
+    width: 130px;
+  }
+  .navbar-brand {
+    width: 130px;
+  }
+  .btn-theme {
+    font-size: 1em;
+    width: 150px;
+  }
 }
