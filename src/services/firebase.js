@@ -4,13 +4,13 @@ import "firebase/firestore";
 import "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD6rS2yuKuj0Nx2a04WlPSvcOqjWBA6zOM",
-  authDomain: "chat-app-32755.firebaseapp.com",
-  databaseURL: "https://chat-app-32755.firebaseio.com",
-  projectId: "chat-app-32755",
-  storageBucket: "chat-app-32755.appspot.com",
-  messagingSenderId: "596480986887",
-  appId: "1:596480986887:web:cf905846430279d476ffa2",
+  apiKey: "AIzaSyAoZS2-fWxPAYmqU_ug-qphj9hfE0AD2Q0",
+  authDomain: "reactro-chat.firebaseapp.com",
+  databaseURL: "https://reactro-chat.firebaseio.com",
+  projectId: "reactro-chat",
+  storageBucket: "reactro-chat.appspot.com",
+  messagingSenderId: "508300852800",
+  appId: "1:508300852800:web:82c7f76c999dc67c7969a5",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -35,7 +35,7 @@ export const createUserProfileDocument = async (user, additionalData) => {
       await userRef.set({
         displayName: displayName,
         email,
-        photoUrl: photoUrl || null,
+        photoUrl: auth().currentUser.photoURL || null,
         createdAt,
         ...additionalData,
       });

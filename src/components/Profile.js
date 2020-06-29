@@ -5,7 +5,7 @@ import { UserContext } from "../Context";
 import { useInput } from "../hooks/useInput";
 
 const Profile = () => {
-  const { value: displayName, bind: bindDisplayName } = useInput("");
+  const { value: displayName, reset, bind: bindDisplayName } = useInput("");
   let imageInput = null;
   const { user } = useContext(UserContext);
   let file;
@@ -30,6 +30,7 @@ const Profile = () => {
         .then((response) => response.ref.getDownloadURL())
         .then((photoUrl) => userRef.update({ photoUrl }));
     }
+    reset();
   };
 
   return (

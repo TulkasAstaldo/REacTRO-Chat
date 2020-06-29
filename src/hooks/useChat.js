@@ -70,7 +70,6 @@ const useChat = () => {
     } catch (error) {
       setWriteError(error.message);
     }
-    console.log(user.displayName);
   };
 
   return {
